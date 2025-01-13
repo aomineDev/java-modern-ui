@@ -61,9 +61,9 @@ public class Main extends JFrame {
 
     JPanel btnContainer = new JPanel(new MigLayout("", "[]push[][][]"));
 
-    panel.putClientProperty(FlatClientProperties.STYLE, "background:$Table.background;" + 
-    "[light]border:0,0,0,0,shade(@background,5%),,20;" +
-    "[dark]border:0,0,0,0,tint(@background,5%),,20");
+    panel.putClientProperty(FlatClientProperties.STYLE, "background:$Table.background;" +
+        "[light]border:0,0,0,0,shade(@background,5%),,20;" +
+        "[dark]border:0,0,0,0,tint(@background,5%),,20");
 
     btnContainer.putClientProperty(FlatClientProperties.STYLE_CLASS, "table_style");
 
@@ -84,26 +84,27 @@ public class Main extends JFrame {
 
   private void testData(JTable table) {
     DefaultTableModel model = (DefaultTableModel) table.getModel();
-    String[] names = {"Beer", "Shirt", "Laptop", "Book", "Coffee", "Phone", "Chair", "Watch", "Sunglases", "Bag", "Headphones", "Camera", "Necklace", "Perfume", "Wallet", "Jacket"};
+    String[] names = { "Beer", "Shirt", "Laptop", "Book", "Coffee", "Phone", "Chair", "Watch", "Sunglases", "Bag",
+        "Headphones", "Camera", "Necklace", "Perfume", "Wallet", "Jacket" };
 
-    for(String n: names) {
+    for (String n : names) {
       model.addRow(getRandomRow(n));
     }
   }
 
   private void setModel() {
     String[] columns = {
-      "",
-      "Name",
-      "Balance",
-      "Other",
-      "Status"
+        "",
+        "Name",
+        "Balance",
+        "Other",
+        "Status"
     };
 
     DefaultTableModel model = new DefaultTableModel(null, columns) {
-      Class[] types = new Class[] {Boolean.class, Object.class, Object.class, Object.class, Object.class};
+      Class[] types = new Class[] { Boolean.class, Object.class, Object.class, Object.class, Object.class };
 
-      boolean[] canEdit = {true, false, false, false, false};
+      boolean[] canEdit = { true, false, false, false, false };
 
       @Override
       public Class getColumnClass(int columnIndex) {
@@ -115,15 +116,16 @@ public class Main extends JFrame {
         return canEdit[columnIndex];
       }
     };
-    
+
     jTList.setModel(model);
-    jTList.getColumn(0).setPreferredWidth(30);
-    jTList.getColumn(1).setPreferredWidth(200);
+    jTList.getColumnModel().getColumn(0).setPreferredWidth(30);
+    jTList.getColumnModel().getColumn(1).setPreferredWidth(200);
   }
 
   private Object[] getRandomRow(String name) {
     DecimalFormat df = new DecimalFormat("#,##0.##");
-    return new Object[] {false, name, "$" + df.format(getAmount(999, 999999)), "$" + df.format(getAmount(999, 999999)), df.format(getAmount(-100, 100))};
+    return new Object[] { false, name, "$" + df.format(getAmount(999, 999999)), "$" + df.format(getAmount(999, 999999)),
+        df.format(getAmount(-100, 100)) };
   }
 
   private double getAmount(int from, int to) {
@@ -136,16 +138,16 @@ public class Main extends JFrame {
     jBAdd.setIcon(new FlatSVGIcon("aomine/icons/table/add.svg", 0.35f));
     jBEdit.setIcon(new FlatSVGIcon("aomine/icons/table/edit.svg", 0.35f));
     jBDelete.setIcon(new FlatSVGIcon("aomine/icons/table/delete.svg", 0.35f));
-    jTFSearch.putClientProperty(FlatClientProperties.TEXT_FIELD_TRAILING_ICON, new FlatSVGIcon("aomine/icons/table/search.svg", 0.35f));
+    jTFSearch.putClientProperty(FlatClientProperties.TEXT_FIELD_TRAILING_ICON,
+        new FlatSVGIcon("aomine/icons/table/search.svg", 0.35f));
 
     // Change scroll style
     JScrollPane scroll = (JScrollPane) table.getParent().getParent();
     scroll.setBorder(BorderFactory.createEmptyBorder());
-    scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, 
-      "background: $Table.background;" + 
-      "track: $Table.background;" +
-      "trackArc: 999"
-    );
+    scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,
+        "background: $Table.background;" +
+            "track: $Table.background;" +
+            "trackArc: 999");
 
     // Add table style class
     JTableHeader tableHeader = table.getTableHeader();
@@ -155,6 +157,7 @@ public class Main extends JFrame {
 
     // To Create Table alignment
     tableHeader.setDefaultRenderer(getAlignmentCellRenderer(tableHeader.getDefaultRenderer(), true));
+
     table.setDefaultRenderer(Object.class, getAlignmentCellRenderer(table.getDefaultRenderer(Object.class), false));
   }
 
@@ -162,25 +165,23 @@ public class Main extends JFrame {
     jTFSearch.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Search");
 
     jTFSearch.putClientProperty(FlatClientProperties.STYLE, "background:@background");
-    
+
     jBAdd.putClientProperty(FlatClientProperties.STYLE, "" +
-      "background:lighten(@background,8%);" + 
-      "borderWidth:1"
-    );
+        "background:lighten(@background,8%);" +
+        "borderWidth:1");
     jBEdit.putClientProperty(FlatClientProperties.STYLE, "" +
-      "background:lighten(@background,8%);" + 
-      "borderWidth:1"
-    );
+        "background:lighten(@background,8%);" +
+        "borderWidth:1");
     jBDelete.putClientProperty(FlatClientProperties.STYLE, "" +
-      "background:lighten(@background,8%);" + 
-      "borderWidth:1"
-    );
+        "background:lighten(@background,8%);" +
+        "borderWidth:1");
   }
 
   private TableCellRenderer getAlignmentCellRenderer(TableCellRenderer oldRender, boolean header) {
     return new DefaultTableCellRenderer() {
       @Override
-      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+      public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+          int row, int column) {
         Component com = oldRender.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         if (com instanceof JLabel) {
@@ -192,7 +193,7 @@ public class Main extends JFrame {
           } else {
             label.setHorizontalAlignment(SwingConstants.LEADING);
           }
-          
+
           if (!header) {
             if (column == 4) {
               if (Double.parseDouble(value.toString()) > 0) {
@@ -216,7 +217,7 @@ public class Main extends JFrame {
     };
   }
 
-  public void handleThemeClick (ActionEvent evt) {
+  public void handleThemeClick(ActionEvent evt) {
     if (!FlatLaf.isLafDark()) {
       EventQueue.invokeLater(() -> {
         FlatAnimatedLafChange.showSnapshot();
@@ -239,7 +240,7 @@ public class Main extends JFrame {
     FlatLaf.registerCustomDefaultsSource("aomine.themes.table");
     UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
 
-    FlatMacDarkLaf.setup();
+    FlatMacLightLaf.setup();
 
     EventQueue.invokeLater(() -> new Main().setVisible(true));
   }

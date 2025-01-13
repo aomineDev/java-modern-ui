@@ -1,6 +1,5 @@
 package aomine.login;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.FlowLayout;

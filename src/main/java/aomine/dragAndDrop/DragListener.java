@@ -68,14 +68,14 @@ public class DragListener implements DropTargetListener {
   private void displayImage(String path) {
     BufferedImage img = null;
 
-    try {
-      img = ImageIO.read(new File(path)); 
+    // try {
+    //   img = ImageIO.read(new File(path)); 
       
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // } catch (Exception e) {
+    //   e.printStackTrace();
+    // }
 
-    ImageIcon icon = new ImageIcon(img);
+    ImageIcon icon = new ImageIcon(path);
     lblImage.setIcon(icon);
     lblImageName.setText(path);
   }
