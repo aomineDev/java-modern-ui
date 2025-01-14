@@ -143,6 +143,7 @@ public class Main extends JFrame {
 
     // Change scroll style
     JScrollPane scroll = (JScrollPane) table.getParent().getParent();
+
     scroll.setBorder(BorderFactory.createEmptyBorder());
     scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,
         "background: $Table.background;" +
