@@ -1,4 +1,4 @@
-package aomine.theme_switch;
+package aomine.themeSwitch;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -32,11 +32,11 @@ public class SwitchIcon implements AnimatedIcon {
     return FlatUIUtils.getBorderArc((JComponent) com);
   }
 
-  @Override 
+  @Override
   public int getAnimationDuration() {
     return 500;
   }
-  
+
   @Override
   public void paintIconAnimated(Component c, Graphics g, int x, int y, float animatedValue) {
     Graphics2D g2 = (Graphics2D) g.create();
@@ -55,7 +55,6 @@ public class SwitchIcon implements AnimatedIcon {
     g2.setClip(new Rectangle(x, y, width, size));
     paintIcon(c, (Graphics2D) g2.create(), animatedX, darkY, darkIcon, animatedValue);
     paintIcon(c, (Graphics2D) g2.create(), animatedX, lightY, lightIcon, 1f - animatedValue);
-    
 
     g2.dispose();
   }
@@ -110,6 +109,7 @@ public class SwitchIcon implements AnimatedIcon {
   public Color getLightColor() {
     return lightColor;
   }
+
   public void setLightColor(Color lightColor) {
     this.lightColor = lightColor;
   }
@@ -117,6 +117,7 @@ public class SwitchIcon implements AnimatedIcon {
   public Icon getDarkIcon() {
     return darkIcon;
   }
+
   public void setDarkIcon(Icon darkIcon) {
     this.darkIcon = darkIcon;
   }
@@ -124,6 +125,7 @@ public class SwitchIcon implements AnimatedIcon {
   public Icon getLightIcon() {
     return lightIcon;
   }
+
   public void setLightIcon(Icon lightIcon) {
     this.lightIcon = lightIcon;
   }

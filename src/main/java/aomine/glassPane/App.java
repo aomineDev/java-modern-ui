@@ -20,62 +20,64 @@ import raven.popup.component.SimplePopupBorder;
 import raven.popup.component.SimplePopupBorderOption;
 
 public class App extends JFrame {
-    public String testingAtribute;
-    App() {
-      init();
-      GlassPanePopup.install(this);
-    }
+  public String testingAtribute;
 
-    public void init() {
-      setTitle("glass pane");
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setSize(new Dimension(1200, 700));
-      setLocationRelativeTo(null);
+  App() {
+    init();
+    GlassPanePopup.install(this);
+  }
 
-      JPanel panel = new JPanel(new MigLayout("fill", "[center]", "[center]"));
-      
-      JButton btnShowGlassPane = new JButton("Show Glass Pane");
+  public void init() {
+    setTitle("glass pane");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setSize(new Dimension(1200, 700));
+    setLocationRelativeTo(null);
 
-      btnShowGlassPane.addActionListener(this::handleShowGlassPaeClick);
+    JPanel body = new JPanel(new MigLayout("fill", "[center]", "[center]"));
 
-      panel.add(btnShowGlassPane);
-      
-      setContentPane(panel);
-    }
+    JButton btnShowGlassPane = new JButton("Show Glass Pane");
 
-    private void handleShowGlassPaeClick(ActionEvent evt) {
-      // GlassPanePopup.showPopup(new Message(), new DefaultOption() {
-      //   @Override
-      //   public boolean closeWhenClickOutside() {
-      //     return true;
-      //   }
-      // });
+    btnShowGlassPane.addActionListener(this::handleShowGlassPaeClick);
 
-      DefaultOption option = new DefaultOption() {
-        @Override
-        public boolean closeWhenClickOutside() {
-          return true;
-        }
-      };
+    body.add(btnShowGlassPane);
 
-      JPanel panel = new JPanel();
-      panel.setPreferredSize(new Dimension(500, 300));
-      String actions[] = {"cancel", "ok"};
-      GlassPanePopup.showPopup(new SimplePopupBorder(new Message(), "Sample message", new SimplePopupBorderOption().useScroll(),actions, (controller, action) -> {
-        if (action == 0) {
-          System.out.println("cancel");
-          
-          GlassPanePopup.closePopup("message");
-        } else if (action == 1) {
-          System.out.println("ok");
-        }
-      }), option, "message");
-    }
+    setContentPane(body);
+  }
 
-    public static void main(String[] args) {
-      FlatRobotoFont.install();
-      FlatMacDarkLaf.setup();
-      UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
-      EventQueue.invokeLater(() -> new App().setVisible(true));
-    }
+  private void handleShowGlassPaeClick(ActionEvent evt) {
+    // GlassPanePopup.showPopup(new Message(), new DefaultOption() {
+    // @Override
+    // public boolean closeWhenClickOutside() {
+    // return true;
+    // }
+    // });
+
+    DefaultOption option = new DefaultOption() {
+      @Override
+      public boolean closeWhenClickOutside() {
+        return true;
+      }
+    };
+
+    // JPanel panel = new JPanel();
+    // panel.setPreferredSize(new Dimension(500, 300));
+    String actions[] = { "cancel", "ok" };
+    GlassPanePopup.showPopup(new SimplePopupBorder(new Message(), "Sample message",
+        new SimplePopupBorderOption().useScroll(), actions, (controller, action) -> {
+          if (action == 0) {
+            System.out.println("cancel");
+
+            GlassPanePopup.closePopup("message");
+          } else if (action == 1) {
+            System.out.println("ok");
+          }
+        }), option, "message");
+  }
+
+  public static void main(String[] args) {
+    FlatRobotoFont.install();
+    FlatMacDarkLaf.setup();
+    UIManager.put("defaultFont", new Font(FlatRobotoFont.FAMILY, Font.PLAIN, 13));
+    EventQueue.invokeLater(() -> new App().setVisible(true));
+  }
 }

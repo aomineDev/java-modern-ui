@@ -1,4 +1,4 @@
-package aomine.datetime_picker;
+package aomine.dateTimePicker;
 
 import javax.swing.*;
 
@@ -35,10 +35,12 @@ public class Main extends JFrame {
       public void dateSelected(DateEvent dateEvent) {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         // LocalDate[] dates = datePicker.getSelectedDateRange();
-        // if (dates != null) System.out.println(df.format(dates[0]) + " - " + df.format(dates[1]));
+        // if (dates != null) System.out.println(df.format(dates[0]) + " - " +
+        // df.format(dates[1]));
 
         LocalDate date = datePicker.getSelectedDate();
-        if (datePicker.isDateSelected()) System.out.println(df.format(date));
+        if (datePicker.isDateSelected())
+          System.out.println(df.format(date));
       }
     });
 

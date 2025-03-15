@@ -1,4 +1,4 @@
-package aomine.theme_switch;
+package aomine.themeSwitch;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -43,17 +43,16 @@ public class Main extends JFrame {
     jTBSwitch.setIcon(darkLighSwitchIcon);
     jTBSwitch.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-    jTBSwitch.putClientProperty(FlatClientProperties.STYLE, 
-      "arc: 999;" +
-      "borderWidth: 0;" +
-      "focusWidth: 0;" +
-      "innerFocusWidth: 0"
-    );
+    jTBSwitch.putClientProperty(FlatClientProperties.STYLE,
+        "arc: 999;" +
+            "borderWidth: 0;" +
+            "focusWidth: 0;" +
+            "innerFocusWidth: 0");
 
     jTBSwitch.addActionListener(new ActionListener() {
       private final ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(1);
       private ScheduledFuture<?> scheduledFuture;
-      
+
       @Override
       public void actionPerformed(ActionEvent evt) {
         if (scheduledFuture != null) {
